@@ -1,14 +1,17 @@
 package qwjntwez.project;
 
+import qwjntwez.project.interfaces.Vector;
 import qwjntwez.project.models.Vector3D;
 
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class Main {
     public static void main(String[] args) {
-        LinkedList<Vector3D> vectorList = new LinkedList<>();
+        LinkedList<Vector> vectorList = new LinkedList<>();
         Scanner input = new Scanner(System.in);
         Random random = new Random(12341541);
 
@@ -19,7 +22,7 @@ public class Main {
             switch (mainMenuChoice){
                 //Додати вектор
                 case 1: {
-                    Vector3D newVector = new Vector3D();
+                    Vector newVector = new Vector3D();
 
                     System.out.println("Введіть 'x' : ");
                     int x = input.nextInt();
@@ -37,7 +40,7 @@ public class Main {
                 case 2: {
                     displayAllVectors(vectorList);
                     System.out.println("Виберіть вектор: ");
-                    Vector3D vector = vectorList.get(input.nextInt() - 1);
+                    Vector vector = vectorList.get(input.nextInt() - 1);
 
                     vector.rewriteVector(input);
                     break;
@@ -46,7 +49,7 @@ public class Main {
                 case 3: {
                     displayAllVectors(vectorList);
                     System.out.println("Виберіть вектор: ");
-                    Vector3D vector = vectorList.get(input.nextInt() - 1);
+                    Vector vector = vectorList.get(input.nextInt() - 1);
 
                     double length = vector.length();
 
@@ -57,12 +60,12 @@ public class Main {
                 case 4: {
                     displayAllVectors(vectorList);
                     System.out.println("Виберіть вектор: ");
-                    Vector3D vector = vectorList.get(input.nextInt() - 1);
+                    Vector vector = vectorList.get(input.nextInt() - 1);
 
                     System.out.println("Введіть скаляр: ");
                     int scalar = input.nextInt();
 
-                    Vector3D result = vector.scalarMultiplication(scalar);
+                    Vector result = vector.scalarMultiplication(scalar);
 
                     System.out.println("Отриманий вектор: ");
                     result.display();
@@ -72,12 +75,12 @@ public class Main {
                 case 5: {
                     displayAllVectors(vectorList);
                     System.out.println("Оберіть перший вектор: ");
-                    Vector3D vector1 = vectorList.get(input.nextInt() - 1);
+                    Vector vector1 = vectorList.get(input.nextInt() - 1);
 
                     System.out.println("Введіть другий вектор: ");
-                    Vector3D vector2 = vectorList.get(input.nextInt() - 1);
+                    Vector vector2 = vectorList.get(input.nextInt() - 1);
 
-                    if (Vector3D.compare(vector1, vector2))
+                    if (Vector3D.compare((Vector3D) vector1,(Vector3D) vector2))
                         System.out.println("Вектори рівні.");
                     else
                         System.out.println("Вектори не рівні.");
@@ -87,15 +90,15 @@ public class Main {
                 case 6: {
                     displayAllVectors(vectorList);
                     System.out.println("Оберіть перший вектор: ");
-                    Vector3D vector1 = vectorList.get(input.nextInt() - 1);
+                    Vector vector1 = vectorList.get(input.nextInt() - 1);
 
                     System.out.println("Оберіть другий вектор: ");
-                    Vector3D vector2 = vectorList.get(input.nextInt() - 1);
+                    Vector vector2 = vectorList.get(input.nextInt() - 1);
 
                     double vector1Len = vector1.length();
                     double vector2Len = vector2.length();
 
-                    System.out.printf("Довжина першого вектору - %f, \n Довжина другого вектору - %f\n", vector1Len, vector2Len);
+                    System.out.printf("Довжина першого вектору - %f, \nДовжина другого вектору - %f\n", vector1Len, vector2Len);
 
                     if (vector1Len > vector2Len)
                         System.out.println("Довжина першого вектору більша за довжину другого.");
@@ -107,7 +110,7 @@ public class Main {
                 }
                 //Вивести вектор
                 case 7:
-                    Vector3D randomVector = vectorList.get(random.nextInt(vectorList.size()));
+                    Vector randomVector = vectorList.get(random.nextInt(vectorList.size()));
                     randomVector.display();
                     break;
                 //Вивести всі вектори
@@ -122,12 +125,13 @@ public class Main {
 
     }
 
-    public static void displayAllVectors(LinkedList<Vector3D> vectors) {
+    public static void displayAllVectors(LinkedList<Vector> vectors) {
         int i = 1;
-        for (Vector3D vector : vectors) {
-            System.out.printf("№ %d | x = %d, y = %d, z = %d \n", i, vector.getX(), vector.getY(), vector.getZ());
+        for (Vector vector : vectors) {
+            System.out.printf("№ %d | " + vector.toString() + "\n", i);
             i++;
         }
+        System.out.println("\n");
     }
 
     public static void displayMainMenu() {

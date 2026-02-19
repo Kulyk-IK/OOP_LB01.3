@@ -8,5 +8,6 @@ public interface Vector {
     public void init(int x, int y, int z);
     public void rewriteVector(Scanner input);
     public double length();
-    public Vector3D scalarMultiplication(final int scalar);
+    public void display();
+    public Vector scalarMultiplication(final int scalar);
 }
